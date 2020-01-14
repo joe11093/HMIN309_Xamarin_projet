@@ -15,6 +15,8 @@ namespace Xamarin_projet
         public MessageListPage()
         {
             InitializeComponent();
+            Device.StartTimer(TimeSpan.FromSeconds(5), () => { RefreshListCallback(); return true; });
+
         }
 
         protected async override void OnAppearing()
@@ -24,6 +26,10 @@ namespace Xamarin_projet
         }
 
         async void RefreshList(object sender, EventArgs args)
+        {
+            listView.ItemsSource = await App.MessageManager.GetMessagesAsync();
+        }
+        async void RefreshListCallback()
         {
             listView.ItemsSource = await App.MessageManager.GetMessagesAsync();
         }
