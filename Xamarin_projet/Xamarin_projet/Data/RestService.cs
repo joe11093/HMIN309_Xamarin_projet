@@ -5,22 +5,23 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using System.Diagnostics;
 using Newtonsoft.Json;
+using System.Collections.ObjectModel;
 
 namespace Xamarin_projet
 {
     public class RestService : IRestService
     {
         HttpClient httpClient;
-        public List<Message> Messages { get; private set; }
+        public ObservableCollection<Message> Messages { get; private set; }
 
         public RestService()
         {
             httpClient = new HttpClient();
         }
 
-        public async Task<List<Message>> RefreshDataAsync()
+        public async Task<ObservableCollection<Message>> RefreshDataAsync()
         {
-            Messages = new List<Message>();
+            Messages = new ObservableCollection<Message>();
 
             var uri = new Uri(string.Format(Constants.BaseAddress, string.Empty));
             Console.WriteLine(uri.ToString());
@@ -30,7 +31,7 @@ namespace Xamarin_projet
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
-                    Messages = JsonConvert.DeserializeObject<List<Message>>(content);
+                    Messages = JsonConvert.DeserializeObject<ObservableCollection<Message>>(content);
                 }
             }
             catch(Exception e)

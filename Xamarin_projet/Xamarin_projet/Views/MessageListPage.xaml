@@ -19,14 +19,7 @@
     
     <ContentPage.Content>
         <StackLayout>
-            <Label 
-                x:Name="label1"
-                Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand"
-                Margin="0,25"
-                />
-            <Label 
+            <!--<Label 
                 
                 Text="Add colors to the list items! Check this link \n https://forums.xamarin.com/discussion/87276/listview-and-alternatingrowbackground-how-to-refresh"
                 VerticalOptions="CenterAndExpand" 
@@ -44,6 +37,7 @@
                 Margin="0,25"
                 TextColor="Red"
                 />
+            -->
             <ListView x:Name="listView"
               Margin="20"
               ItemSelected="listView_ItemSelected">
@@ -64,12 +58,11 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            <Label 
-                x:Name="labelEnd"
-                Text="END"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand"
-                Margin="0,25"
+            <Button
+                Text="Refresh"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="Center"
+                Clicked="RefreshList"
                 />
         </StackLayout>
     </ContentPage.Content>

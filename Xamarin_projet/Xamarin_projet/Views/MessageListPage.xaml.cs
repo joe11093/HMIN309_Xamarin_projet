@@ -20,10 +20,13 @@ namespace Xamarin_projet
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            label1.Text = "OnAppearing()";
             listView.ItemsSource = await App.MessageManager.GetMessagesAsync();
         }
 
+        async void RefreshList(object sender, EventArgs args)
+        {
+            listView.ItemsSource = await App.MessageManager.GetMessagesAsync();
+        }
         /*
         async void OnAddItemClicked(object sender, EventArgs e)
         {

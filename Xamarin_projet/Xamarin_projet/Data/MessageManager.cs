@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
 namespace Xamarin_projet
@@ -13,7 +14,7 @@ namespace Xamarin_projet
             this.restService = restService;
         }
 
-        public Task<List<Message>> GetMessagesAsync()
+        public Task<ObservableCollection<Message>> GetMessagesAsync()
         {
             return restService.RefreshDataAsync();
         }
