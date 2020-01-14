@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Xamarin_projet.MessageListPage">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="+" Clicked="ToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <OnPlatform x:TypeArguments="ImageSource">
+                    <On Platform="Android, UWP" Value="plus.png" />
+                </OnPlatform>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+
+    
+    <ContentPage.Content>
+        <StackLayout>
+            <Label 
+                x:Name="label1"
+                Text="Welcome to Xamarin.Forms!"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand"
+                Margin="0,25"
+                />
+            <Label 
+                
+                Text="Add colors to the list items! Check this link \n https://forums.xamarin.com/discussion/87276/listview-and-alternatingrowbackground-how-to-refresh"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand"
+                Margin="0,25"
+                TextColor="Red"
+                />
+            <Label 
+                
+                Text="Maybe I should use ObservableCollection to be able to notify the listview when the data is updated.\n
+                Check out microsoft's tutorial on how to create and bind them.
+                "
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand"
+                Margin="0,25"
+                TextColor="Red"
+                />
+            <ListView x:Name="listView"
+              Margin="20"
+              ItemSelected="listView_ItemSelected">
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="20,0,0,0"
+                                 HorizontalOptions="StartAndExpand"
+                                 Orientation="Horizontal">
+                                <Label Text="{Binding Id}"
+                               VerticalTextAlignment="Center" />
+                                <Label Text="{Binding StudentMessage}"
+                               VerticalTextAlignment="Center" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Label 
+                x:Name="labelEnd"
+                Text="END"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand"
+                Margin="0,25"
+                />
+        </StackLayout>
+    </ContentPage.Content>
+
+   
+   
+</ContentPage>

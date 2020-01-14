@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Xamarin_projet.MainPage">
+
+    <StackLayout>
+        <!-- Place new controls here -->
+        <Label Text="What would you like to do?" 
+           HorizontalOptions="Center"
+           Margin="0,20"     
+            />
+
+        <Button
+            Text ="View Messages"
+            Clicked="GoToMessageList"
+            />
+        <Button
+            Text="View Message Map"
+            />
+    </StackLayout>
+
+</ContentPage>
