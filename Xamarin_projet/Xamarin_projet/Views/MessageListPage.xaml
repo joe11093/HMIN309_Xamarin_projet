@@ -47,17 +47,23 @@
                         <ViewCell>
                             <StackLayout Padding="20,0,0,0"
                                  HorizontalOptions="StartAndExpand"
-                                 Orientation="Horizontal">
-                                <Label Text="{Binding Id}"
+                                 Orientation="Vertical">
+                                <Label Text="{Binding StudentId}"
                                VerticalTextAlignment="Center" />
                                 <Label Text="{Binding StudentMessage}"
-                               VerticalTextAlignment="Center" />
+                                    LineBreakMode="TailTruncation"
+                                    WidthRequest="5"
+                                    VerticalTextAlignment="Center" />
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
 
+            <Label
+                x:Name="fakeToast"
+                Text=""
+                />
             <Button
                 Text="Refresh"
                 VerticalOptions="CenterAndExpand"

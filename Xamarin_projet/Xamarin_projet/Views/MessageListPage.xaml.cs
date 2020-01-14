@@ -16,7 +16,14 @@ namespace Xamarin_projet
         {
             InitializeComponent();
             Device.StartTimer(TimeSpan.FromSeconds(5), () => { RefreshListCallback(); return true; });
+            listView.ItemTapped += ListView_ItemTapped;
 
+        }
+
+        private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            
+            fakeToast.Text = e.Item.ToString();
         }
 
         protected async override void OnAppearing()

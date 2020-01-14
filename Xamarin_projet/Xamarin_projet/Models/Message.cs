@@ -30,5 +30,10 @@ namespace Xamarin_projet
             GpsLong = gpsLong;
             StudentMessage = studentMessage ?? throw new ArgumentNullException(nameof(studentMessage));
         }
+
+        public override string ToString()
+        {
+            return "id: " + this.Id + "sender: " + this.StudentId + "message: " + this.StudentMessage;
+        }
     }
 }
