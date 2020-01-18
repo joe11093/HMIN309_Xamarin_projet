@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Xamarin_projet.Views.MessagePage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Button
+                x:Name="btnBack"
+                Text="Back to List"
+                Clicked="btnBack_Clicked"
+                />
+            <Label 
+                x:Name="labelSender"
+                Text="Welcome to Xamarin.Forms!"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+            <Label 
+                x:Name="labelMessage"
+                Text="Welcome to Xamarin.Forms!"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+            <Label 
+                x:Name="fakeToast"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+            <Button
+                x:Name="btnFavorite"
+                Text="Add to Favorites"
+                Clicked="btnFavorite_Clicked"
+                />
+            <ListView
+                x:Name="lvMessagesOfUser"
+                Margin="20"
+                >
+                <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="20,0,0,0"
+                                 HorizontalOptions="StartAndExpand"
+                                 Orientation="Vertical">
+                            <Label Text="{Binding StudentId}"
+                               VerticalTextAlignment="Center" />
+                            <Label Text="{Binding StudentMessage}"
+                                    LineBreakMode="TailTruncation"
+                                    WidthRequest="5"
+                                    VerticalTextAlignment="Center" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>   
+        </StackLayout>
+        
+    </ContentPage.Content>
+</ContentPage>

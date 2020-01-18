@@ -1,20 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Xamarin_projet.Views;
 
 namespace Xamarin_projet
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MessageListPage : ContentPage
     {
+        public static ObservableCollection<Message> MessageList { get; set; }
+
         public MessageListPage()
         {
             InitializeComponent();
+            MessageList = new ObservableCollection<Message>();
             Device.StartTimer(TimeSpan.FromSeconds(5), () => { RefreshListCallback(); return true; });
             listView.ItemTapped += ListView_ItemTapped;
 
@@ -22,23 +27,29 @@ namespace Xamarin_projet
 
         private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            
-            fakeToast.Text = e.Item.ToString();
+           Navigation.PushModalAsync(new MessagePage((Message)e.Item));
         }
 
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            listView.ItemsSource = await App.MessageManager.GetMessagesAsync();
+            //listView.ItemsSource = await App.MessageManager.GetMessagesAsync();
+            MessageList = await App.MessageManager.GetMessagesAsync();
+            listView.ItemsSource = MessageList;
         }
 
         async void RefreshList(object sender, EventArgs args)
         {
-            listView.ItemsSource = await App.MessageManager.GetMessagesAsync();
+            //listView.ItemsSource = await App.MessageManager.GetMessagesAsync();
+            MessageList = await App.MessageManager.GetMessagesAsync();
+            listView.ItemsSource = MessageList;
         }
         async void RefreshListCallback()
         {
-            listView.ItemsSource = await App.MessageManager.GetMessagesAsync();
+            //listView.ItemsSource = await App.MessageManager.GetMessagesAsync();
+            MessageList = await App.MessageManager.GetMessagesAsync();
+            listView.ItemsSource = MessageList;
+            
         }
         /*
         async void OnAddItemClicked(object sender, EventArgs e)

@@ -18,6 +18,8 @@ namespace Xamarin_projet
         [JsonProperty("student_message")]
         public string StudentMessage { get; set; }
 
+        public bool Favorite { get; set; }
+
         public Message()
         {
         }
@@ -29,6 +31,17 @@ namespace Xamarin_projet
             GpsLat = gpsLat;
             GpsLong = gpsLong;
             StudentMessage = studentMessage ?? throw new ArgumentNullException(nameof(studentMessage));
+            Favorite = false;
+        }
+
+        public Message(int id, int studentId, double gpsLat, double gpsLong, string studentMessage, bool Fav)
+        {
+            Id = id;
+            StudentId = studentId;
+            GpsLat = gpsLat;
+            GpsLong = gpsLong;
+            StudentMessage = studentMessage ?? throw new ArgumentNullException(nameof(studentMessage));
+            Favorite = Fav;
         }
 
         public override string ToString()
