@@ -7,11 +7,25 @@ namespace Xamarin_projet
     public partial class App : Application
     {
         public static MessageManager MessageManager { get; private set; }
+        static MessageDatabase database;
+
         public App()
         {
             InitializeComponent();
             MessageManager = new MessageManager(new RestService());
             MainPage = new MainPage();
+        }
+
+        public static MessageDatabase Database
+        {
+            get
+            {
+                if (database == null)
+                {
+                    database = new MessageDatabase();
+                }
+                return database;
+            }
         }
 
         protected override void OnStart()

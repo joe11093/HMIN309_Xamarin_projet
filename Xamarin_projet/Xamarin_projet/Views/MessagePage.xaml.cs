@@ -29,10 +29,12 @@ namespace Xamarin_projet.Views
             
         }
 
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
-            if (Msg.Favorite)
+            displayDbSize();
+            Message foundMessage = await App.Database.GetMessageAsync(this.Msg.Id);
+            if (foundMessage != null)
             {
                 btnFavorite.Text = "Unfavorite";
             }
@@ -49,7 +51,7 @@ namespace Xamarin_projet.Views
             
             foreach(var data in Messages)
             {
-                if(data.StudentId == Msg.StudentId)
+                if(data.StudentId == Msg.StudentId && data.Id != this.Msg.Id)
                 {
                     MessagesOfUser.Add(data);
                 }
@@ -57,28 +59,38 @@ namespace Xamarin_projet.Views
             lvMessagesOfUser.ItemsSource = this.MessagesOfUser;
         }
 
-        private void btnFavorite_Clicked(object sender, EventArgs e)
+        private async void btnFavorite_Clicked(object sender, EventArgs e)
         {
-            
-            if (Msg.Favorite)
+            Message foundMessage = await App.Database.GetMessageAsync(this.Msg.Id);
+            if (foundMessage != null)
             {
                 Msg.Favorite = false;
-                fakeToast.Text = "Removed from Favorites";
                 btnFavorite.Text = "Favorite";
-                
+                await App.Database.DeleteItemAsync(this.Msg);
+                List<Message> listFavMessages = await App.Database.GetMessagesAsync();
+                displayDbSize();
             }
             else
             {
                 Msg.Favorite = true;
-                fakeToast.Text = "Added to Favorites";
                 btnFavorite.Text = "Unfavorite";
-                
+                await App.Database.SaveItemAsync(this.Msg);
+                Message added = await App.Database.GetMessageAsync(this.Msg.Id);
+                List<Message> listFavMessages = await App.Database.GetMessagesAsync();
+                displayDbSize();
+
             }
         }
 
         private void btnBack_Clicked(object sender, EventArgs e)
         {
             Navigation.PopModalAsync();
+        }
+
+        private async void displayDbSize()
+        {
+            List<Message> dbMessages = await App.Database.GetMessagesAsync();
+            fakeToast.Text = "Number of favorited Messages: " + dbMessages.Count;
         }
     }
 }

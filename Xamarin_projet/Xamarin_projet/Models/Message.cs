@@ -2,12 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using SQLite;
 
 namespace Xamarin_projet
 {
     public class Message
     {
-        [JsonProperty("id")]
+        [JsonProperty("id"), PrimaryKey]
         public int Id { get; set; }
         [JsonProperty("student_id")]
         public int StudentId { get; set; }
