@@ -20,7 +20,7 @@ namespace Xamarin_projet
         {
             InitializeComponent();
             MessageList = new ObservableCollection<Message>();
-            Device.StartTimer(TimeSpan.FromSeconds(5), () => { RefreshListCallback(); return true; });
+            Device.StartTimer(TimeSpan.FromSeconds(10), () => { RefreshListCallback(); return true; });
             listView.ItemTapped += ListView_ItemTapped;
 
         }
@@ -33,21 +33,26 @@ namespace Xamarin_projet
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            //listView.ItemsSource = await App.MessageManager.GetMessagesAsync();
-            MessageList = await App.MessageManager.GetMessagesAsync();
+            RefreshListCallback();
             listView.ItemsSource = MessageList;
         }
 
         async void RefreshList(object sender, EventArgs args)
         {
-            //listView.ItemsSource = await App.MessageManager.GetMessagesAsync();
-            MessageList = await App.MessageManager.GetMessagesAsync();
-            listView.ItemsSource = MessageList;
+            RefreshListCallback();
         }
         async void RefreshListCallback()
         {
-            //listView.ItemsSource = await App.MessageManager.GetMessagesAsync();
             MessageList = await App.MessageManager.GetMessagesAsync();
+            List<Message> favList = await App.Database.GetMessagesAsync();
+            if(favList.Count > 0)
+            {
+                foreach(Message m in favList)
+                {
+                    MessageList.Insert(0, m);
+                }
+                
+            }
             listView.ItemsSource = MessageList;
             
         }

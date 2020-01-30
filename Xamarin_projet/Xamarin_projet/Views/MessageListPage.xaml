@@ -35,6 +35,7 @@
                                     LineBreakMode="TailTruncation"
                                     WidthRequest="5"
                                     VerticalTextAlignment="Center" />
+                                
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
